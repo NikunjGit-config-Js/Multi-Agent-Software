@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OrgMind turns one objective into coordinated, reviewed AI work.">
+  <title>OrgMind — AI Workforce Control Room</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="OrgMind home">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span><strong>ORGMIND</strong><small>AI WORKFORCE OS</small></span>
+    </a>
+    <div class="topbar-center">
+      <span class="live-dot"></span>
+      <span id="runtimeLabel">Local control room</span>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-button" id="historyButton" type="button" aria-label="Show recent missions" title="Recent missions">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5M12 7v5l3 2"/></svg>
+      </button>
+      <span class="run-pill" id="runPill">NO ACTIVE RUN</span>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <aside class="mission-panel">
+      <div class="panel-heading">
+        <span class="step-number">01</span>
+        <div><p>MISSION CONTROL</p><h1>Brief the company</h1></div>
+      </div>
+
+      <div class="template-strip" id="templateStrip" aria-label="Mission templates"></div>
+
+      <label class="field-label" for="objective">Objective</label>
+      <div class="textarea-wrap">
+        <textarea id="objective" maxlength="2400" rows="7" placeholder="What outcome should the organization deliver?"></textarea>
+        <span class="char-count" id="charCount">0 / 2400</span>
+      </div>
+
+      <details class="context-details">
+        <summary>Add constraints or context <span>optional</span></summary>
+        <textarea id="context" maxlength="6000" rows="4" placeholder="Audience, deadline, source material, technical constraints..."></textarea>
+      </details>
+
+      <fieldset class="deliverables">
+        <legend>Assemble departments</legend>
+        <p>Select what the company must deliver.</p>
+        <div class="deliverable-grid" id="deliverableGrid">
+          <label class="deliverable-option">
+            <input type="checkbox" value="research" checked>
+            <span class="deliverable-icon">R</span><span><strong>Research</strong><small>Strategy memo</small></span>
+          </label>
+          <label class="deliverable-option">
+            <input type="checkbox" value="code" checked>
+            <span class="deliverable-icon">&lt;/&gt;</span><span><strong>Engineering</strong><small>Code blueprint</small></span>
+          </label>
+          <label class="deliverable-option">
+            <input type="checkbox" value="ux" checked>
+            <span class="deliverable-icon">UX</span><span><strong>Product design</strong><small>Experience spec</small></span>
+          </label>
+          <label class="deliverable-option">
+            <input type="checkbox" value="notes" checked>
+            <span class="deliverable-icon">N</span><span><strong>Knowledge</strong><small>Learning notes</small></span>
+          </label>
+          <label class="deliverable-option wide">
+            <input type="checkbox" value="slides" checked>
+            <span class="deliverable-icon">P</span><span><strong>Presentation</strong><small>Executive deck outline</small></span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="settings-row">
+        <label>Workforce
+          <select id="provider"><option value="demo">Demo workforce</option></select>
+        </label>
+        <label>QA bar <output id="qualityOutput">78%</output>
+          <input id="quality" type="range" min="50" max="95" value="78">
+        </label>
+      </div>
+
+      <button class="launch-button" id="launchButton" type="button">
+        <span>Deploy workforce</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+      </button>
+      <p class="launch-note"><span class="shield">✓</span> Generated code is never executed automatically.</p>
+    </aside>
+
+    <section class="workspace">
+      <div class="status-hero">
+        <div class="status-copy">
+          <p class="kicker" id="statusKicker">ORGANIZATION STANDBY</p>
+          <h2 id="phaseTitle">Your AI company is ready.</h2>
+          <p id="phaseDescription">Choose the departments, write one outcome, and deploy a bounded team.</p>
+        </div>
+        <div class="mission-metrics">
+          <div><strong id="metricDepartments">5</strong><span>DEPARTMENTS</span></div>
+          <div><strong id="metricQuality">—</strong><span>AVG. QUALITY</span></div>
+          <div><strong id="metricCalls">0</strong><span>MODEL CALLS</span></div>
+          <div><strong id="metricTime">00:00</strong><span>ELAPSED</span></div>
+        </div>
+        <div class="progress-track" aria-label="Mission progress"><span id="progressBar"></span></div>
+        <span class="progress-number" id="progressNumber">0%</span>
+      </div>
+
+      <div class="control-grid">
+        <section class="organization-card card">
+          <div class="card-header">
+            <div><p>LIVE STRUCTURE</p><h3>Organization map</h3></div>
+            <span class="legend"><i></i> Active employee</span>
+          </div>
+          <div class="org-map" id="orgMap">
+            <div class="ceo-card standby">
+              <span class="avatar">C</span>
+              <div><small>EXECUTIVE OFFICE</small><strong>CEO Orchestrator</strong><p>Awaiting mission brief</p></div>
+              <span class="status-badge">STANDBY</span>
+            </div>
+            <div class="org-connector"><span></span></div>
+            <div class="department-grid" id="departmentGrid"></div>
+          </div>
+        </section>
+
+        <aside class="ledger-card card">
+          <div class="card-header">
+            <div><p>TRACEABLE BY DESIGN</p><h3>Activity ledger</h3></div>
+            <span class="event-count" id="eventCount">0 events</span>
+          </div>
+          <div class="ledger" id="ledger" aria-live="polite">
+            <div class="empty-ledger">
+              <span class="radar"><i></i></span>
+              <strong>No activity yet</strong>
+              <p>Every delegation, review, and revision will appear here.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <section class="vault-card card" id="vaultCard">
+        <div class="card-header">
+          <div><p>INTEGRATED OUTPUT</p><h3>Delivery vault</h3></div>
+          <a class="bundle-button disabled" id="bundleButton" href="#" aria-disabled="true">
+            Download complete bundle
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 21h14"/></svg>
+          </a>
+        </div>
+        <div class="artifact-grid" id="artifactGrid">
+          <div class="vault-empty"><span>Artifacts will arrive here after independent QA.</span></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="history-drawer" id="historyDrawer" aria-hidden="true">
+    <div class="drawer-header"><div><p>ARCHIVE</p><h2>Recent missions</h2></div><button id="closeHistory" aria-label="Close">×</button></div>
+    <div id="historyList" class="history-list"></div>
+  </aside>
+
+  <dialog id="previewDialog">
+    <div class="dialog-header">
+      <div><p id="previewKind">ARTIFACT</p><h2 id="previewTitle">Preview</h2></div>
+      <button id="closePreview" aria-label="Close preview">×</button>
+    </div>
+    <pre id="previewContent"></pre>
+    <div class="dialog-footer"><a id="previewDownload" href="#">Download file</a></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>
+
