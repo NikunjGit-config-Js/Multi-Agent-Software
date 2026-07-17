@@ -11,8 +11,8 @@ The project deliberately works in two modes:
 
 - **Demo mode** runs locally with no API key and is useful for understanding,
   presenting, and testing the orchestration system.
-- **Live model mode** connects the same workflow to an OpenAI-compatible API or
-  Anthropic. Provider credentials stay in environment variables.
+- **Live model mode** connects the same workflow to Gemini, an OpenAI-compatible
+  API, or Anthropic. Provider credentials stay in environment variables.
 
 ## What is implemented
 
@@ -50,6 +50,18 @@ python app.py --port 9000
 
 Copy `.env.example` to `.env`, add a key, then load the variables in your shell.
 OrgMind never writes API keys to run files or sends them to the browser.
+
+### Google Gemini
+
+Create a `GEMINI_API_KEY` in Google AI Studio and store it as a Codespaces
+secret. The stable `gemini-2.5-flash` model is used by default.
+
+```bash
+export ORGMIND_PROVIDER=gemini
+export GEMINI_API_KEY="..."
+export ORGMIND_GEMINI_MODEL="gemini-2.5-flash"
+python app.py
+```
 
 ### OpenAI-compatible
 

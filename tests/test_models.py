@@ -30,7 +30,15 @@ class MissionRequestTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             request.validate()
 
+    def test_accepts_gemini_provider(self):
+        request = MissionRequest(
+            objective="Build a useful AI workflow for students.",
+            deliverables=["research"],
+            provider="gemini",
+        )
+        request.validate()
+        self.assertEqual(request.provider, "gemini")
+
 
 if __name__ == "__main__":
     unittest.main()
-

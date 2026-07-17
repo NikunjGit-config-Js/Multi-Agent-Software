@@ -49,8 +49,8 @@ class MissionRequest:
         unknown = set(self.deliverables) - allowed
         if not self.deliverables or unknown:
             raise ValueError(f"Choose one or more valid deliverables; unknown: {sorted(unknown)}")
-        if self.provider not in {"demo", "openai", "anthropic"}:
-            raise ValueError("Provider must be demo, openai, or anthropic")
+        if self.provider not in {"demo", "gemini", "openai", "anthropic"}:
+            raise ValueError("Provider must be demo, gemini, openai, or anthropic")
         if not 0.5 <= self.quality_threshold <= 1.0:
             raise ValueError("Quality threshold must be between 0.5 and 1.0")
         if not 1 <= self.max_parallel <= 8:
