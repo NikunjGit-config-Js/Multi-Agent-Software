@@ -1,0 +1,14 @@
+[project]
+name = "orgmind"
+version = "0.1.0"
+description = "A corporate-style, provider-neutral AI workforce orchestrator"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Nikunj Mathur"}]
+
+[project.scripts]
+orgmind = "app:main"
+
+[tool.ruff]
+line-length = 100
+
